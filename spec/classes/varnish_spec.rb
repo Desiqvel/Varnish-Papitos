@@ -21,6 +21,10 @@ describe 'varnish', type: :class do
             it { is_expected.to raise_error(Puppet::Error, %r{Varnish 3 from Packagecloud is not supported on Ubuntu 16.04 \(Xenial\)}) }
             should_fail = 1
           end
+        elsif facts[:lsbdistcodename] == 'bionic'
+            it { is_expected.to raise_error(Puppet::Error, %r{Varnish 3 from Packagecloud is not supported on Ubuntu 18.04 \(Bionic\)}) }
+            should_fail = 1
+          end
         when '5.0'
           if facts[:osfamily] == 'RedHat'
             case facts[:operatingsystemmajrelease]
@@ -51,8 +55,8 @@ describe 'varnish', type: :class do
           it { is_expected.to compile.with_all_deps }
 
           if (facts[:osfamily] == 'RedHat' && facts[:operatingsystemmajrelease] == '7' && version != '3.0') ||
-             (facts[:osfamily] == 'Debian' && (facts[:lsbdistcodename] == 'jessie' || facts[:lsbdistcodename] == 'xenial'))
-            it { is_expected.to contain_file('/etc/systemd/system/varnish.service') }
+             (facts[:osfamily] == 'Debian' && (facts[:lsbdistcodename] == 'jessie' || facts[:lsbdistcodename] == 'xenial' || facts[:lsbdistcodename] == 'bionic'))
+             it { is_expected.to contain_file('/etc/systemd/system/varnish.service') }
             it { is_expected.to contain_exec('varnish_systemctl_daemon_reload') }
           end
 

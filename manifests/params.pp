@@ -43,7 +43,14 @@ class varnish::params {
 
       case $::operatingsystem {
         'Ubuntu': {
-          $systemd_version = '16.04'
+                case $::lsbdistcodename {
+                  'xenial': {
+                  $systemd_version = '16.04'
+                  }
+                  'bionic': {
+                  $systemd_version = '18.04'
+                  }
+                }
         }
         'Debian': {
           $systemd_version = '8'
