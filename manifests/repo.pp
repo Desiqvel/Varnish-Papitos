@@ -15,6 +15,13 @@ class varnish::repo {
         }
       }
 
+      if $ver == '60' and $::operatingsystemmajrelease == '7' {
+	} else { fail('Varnish 6.0 from Packagecloud is not supported on OS release under 7)')
+      }
+      if $ver == '61' and $::operatingsystemmajrelease == '7' {
+	} else { fail('Varnish 6.1 from Packagecloud is not supported on OS release under 7)')
+      }
+
       $package_require = undef
 
       # Varnish 4 and above need EPEL for jemalloc
@@ -63,6 +70,18 @@ class varnish::repo {
         }
       }
 
+      if $ver == '60' {
+        if !($::lsbdistcodename == 'stretch') or !($::lsbdistcodename == 'bionic') or !($::lsbdistcodename == 'xenial') {
+      }   else { fail('Varnish 6.0 from Packagecloud is not supported on this Debian version')
+        }
+      }
+
+      if $ver == '61' {
+        if !($::lsbdistcodename == 'stretch') or !($::lsbdistcodename == 'bionic') or !($::lsbdistcodename == 'xenial') {
+      }   else { fail('Varnish 6.1 from Packagecloud is not supported on this Debian version')
+        }
+      }
+
       ensure_packages('apt-transport-https')
 
       $os_lower        = downcase($::operatingsystem)
@@ -78,7 +97,7 @@ class varnish::repo {
         '3.0' => '246BE381150865E2DC8C6B01FC1318ACEE2C594C',
       }
 
-      ::apt::source { 'varnish-cache':
+     ::apt::source { 'varnish-cache':
         comment  => "Apt source for Varnish ${::varnish::version_major}.${::varnish::version_minor}",
         location => "https://packagecloud.io/varnishcache/varnish${ver}/${os_lower}/",
         repos    => 'main',
