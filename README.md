@@ -12,7 +12,7 @@
 1. [Usage - Configuration options and additional functionality](#usage)
     * [Examples](#examples)
     * [Parameter Reference](#parameter-reference)
-    * [Major Varnish version and Varnish package (version minor)](#varnish-package)
+    * [Major Varnish version and Varnish package](#varnish-package)
 1. [Limitations - OS compatibility, etc.](#limitations)
 1. [Development - Guide for contributing to the module](#development)
 
@@ -161,7 +161,7 @@ To use multiple storage backends in varnish for example a primary `4GB memory ba
 ### Major Varnish version and Varnish package (version minor)
 
 |Version Major|version minor|
-|-------------|-------------|
+|---|---|
 |6.1|6.1.1|
 |6.0|6.0.1|
 |5.2|5.2.1|
