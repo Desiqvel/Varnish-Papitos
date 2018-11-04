@@ -1,7 +1,5 @@
 # puppet-varnish
 
-#[![Build Status](https://secure.travis-ci.org/claranet/puppet-varnish.png?branch=master)](http://travis-ci.org/claranet/puppet-varnish)
-# [![Puppet Forge](http://img.shields.io/puppetforge/v/claranet/varnish.svg)](https://forge.puppetlabs.com/claranet/varnish)
 # [![Forge Downloads](https://img.shields.io/puppetforge/dt/claranet/varnish.svg)](https://forge.puppetlabs.com/claranet/varnish)
 
 #### Table of Contents
@@ -14,7 +12,6 @@
     * [Parameter Reference](#parameter-reference)
     * [Major Varnish version and Varnish package](#varnish-package)
 1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
@@ -25,8 +22,7 @@ This module Installs and configures Varnish. Further built from diffrent Puppetf
 **Please note that the master branch of this module does not support Puppet 3!**
 
 On 31st December 2016, support for Puppet 3.x was withdrawn. As such, this
-module no longer supports Puppet 3 - if you require Puppet 3 compatibility,
-please use the latest version [4.x version from the Puppet Forge](https://forge.puppet.com/Claranet/varnish), or the [puppet3](https://github.com/claranet/varnish/tree/puppet3) branch in Git.
+module no longer supports Puppet 3.
 
 ## Module Description
 
@@ -143,7 +139,7 @@ To use multiple storage backends in varnish for example a primary `4GB memory ba
 |secret|Secret for admin access|
 |secret_file|File to store the secret|
 |vcl_conf|Varnish vcl config file path|
-|listen|IP to bind to|
+|listen|IP to bind to in system/varnish.service|
 |listen_port|TCP port to listen on|
 |admin_listen|Admin interface IP to bind to|
 |admin_port|TCP port for admin interface to listen on|
@@ -180,8 +176,3 @@ module will attempt to flag known issues, however:
 * Varnish 4.0 supports **only** Debian Enterprice Linux 6/7, Debian 7/8/9 and Ubuntu 14.04
 * Varnish 5.0 supports **only** Debian 8 and Ubuntu 16.04
 * Varnish 6.0 and 6.1 supports **only** Enterprice Linux 7, Debian 9, Ubuntu 16.04 and 18.04
-
-## Development
-
-* Copyright (C) 2017 Claranet
-* Distributed under the terms of the Apache License v2.0 - see LICENSE file for details.
