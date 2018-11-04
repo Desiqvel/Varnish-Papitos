@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'varnish', type: :class do
-  ['3.0', '4.0', '4.1', '5.0', '5.1', '5.2'].each do |version|
+  ['3.0', '4.0', '4.1', '5.0', '5.1', '5.2', '6.0', '6.1'].each do |version|
     on_supported_os.each do |os, facts|
       context "Varnish #{version} on #{os}" do
         let(:facts) do
@@ -16,11 +16,44 @@ describe 'varnish', type: :class do
 
         should_fail = 0
         case version
+        when '6.0'
+          if facts[:osfamily] == 'RedHat'
+            case facts[:operatingsystemmajrelease]
+            when '6'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.0 from Packagecloud is not supported on RHEL\/CentOS 6}) }
+              should_fail = 1
+            end
+          elsif facts[:osfamily] == 'Debian'
+            case facts[:lsbdistcodename]
+            when 'wheezy'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.0 from Packagecloud is not supported on \(Wheezy\)}) }
+              should_fail = 1
+            end
+          elsif facts[:lsbdistcodename] == 'trusty'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.0 from Packagecloud is not supported on \(Trusty\)}) }
+              should_fail = 1
+          end
+        when '6.1'
+          if facts[:osfamily] == 'RedHat'
+            case facts[:operatingsystemmajrelease]
+            when '6'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.1 from Packagecloud is not supported on RHEL\/CentOS 6}) }
+              should_fail = 1
+            end
+	  elsif facts[:osfamily] == 'Debian'
+            case facts[:lsbdistcodename]
+            when 'wheezy'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.1 from Packagecloud is not supported on \(Wheezy\)}) }
+              should_fail = 1
+	    end
+          elsif facts[:lsbdistcodename] == 'trusty'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 6.1 from Packagecloud is not supported on \(Trusty\)}) }
+	      should_fail = 1
+	  end
         when '3.0'
           if facts[:lsbdistcodename] == 'xenial'
             it { is_expected.to raise_error(Puppet::Error, %r{Varnish 3 from Packagecloud is not supported on Ubuntu 16.04 \(Xenial\)}) }
             should_fail = 1
-          end
         elsif facts[:lsbdistcodename] == 'bionic'
             it { is_expected.to raise_error(Puppet::Error, %r{Varnish 3 from Packagecloud is not supported on Ubuntu 18.04 \(Bionic\)}) }
             should_fail = 1
@@ -42,14 +75,13 @@ describe 'varnish', type: :class do
             when 'wheezy'
               it { is_expected.to raise_error(Puppet::Error, %r{Varnish 5.0 from Packagecloud is not supported on Debian 7 \(Wheezy\)}) }
               should_fail = 1
-            when 'trusty'
-              # rubocop:disable LineLength
-              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 5.0 has a known packaging bug in the reload-vcl script, please use 5.1 instead. If the bug has been fixed, please submit a pull request to remove this message.}) }
-              # rubocop:enable LineLength
+	    end
+          elsif facts[:lsbdistcodename] == 'trusty'
+              it { is_expected.to raise_error(Puppet::Error, %r{Varnish 5.0 from Packagecloud is not supported on \(Trusty\)}) }
               should_fail = 1
-            end
           end
         end
+end
 
         if should_fail == 0
           it { is_expected.to compile.with_all_deps }
