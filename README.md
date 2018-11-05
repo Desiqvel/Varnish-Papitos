@@ -1,7 +1,5 @@
 # puppet-varnish
 
- [![Forge Downloads]](https://forge.puppet.com/desiqvel/varnish)
-
 #### Table of Contents
 
 1. [Overview - What is the puppet-varnish module?](#overview)
