@@ -1,6 +1,6 @@
 # puppet-varnish
 
-# [![Forge Downloads]](https://forge.puppet.com/desiqvel/varnish)
+ [![Forge Downloads]](https://forge.puppet.com/desiqvel/varnish)
 
 #### Table of Contents
 
