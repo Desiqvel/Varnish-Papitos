@@ -1,6 +1,6 @@
 # puppet-varnish
 
-# [![Forge Downloads](https://img.shields.io/puppetforge/dt/claranet/varnish.svg)](https://forge.puppetlabs.com/claranet/varnish)
+# [![Forge Downloads]](https://forge.puppet.com/desiqvel/varnish)
 
 #### Table of Contents
 
