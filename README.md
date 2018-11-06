@@ -13,7 +13,7 @@
 
 ## Overview
 
-This module Installs and configures Varnish. Further built from diffrent Puppetforge modules.
+This module Installs and configures Varnish. Further built from diffrent Puppetforge modules (bashtoni, Claranet...).
 
 ## Puppet 3 Support
 
